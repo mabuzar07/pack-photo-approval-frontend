@@ -2,6 +2,11 @@ import { Button, Table } from "antd";
 import "./styles.css";
 import { useState } from "react";
 import DownIcon from "../../assets/svg/DownIcon";
+import ExpandableComp from "../ExpandableComp";
+import UpIcon from "../../assets/svg/UpIcon";
+import PendingIcon from "../../assets/svg/PendingIcon";
+import ApprovedIcon from "../../assets/svg/ApprovedIcon";
+import RejectedIcon from "../../assets/svg/RejectedIcon";
 
 const PrimaryTable = () => {
   const [expandedRowKeys, setExpandedRowKeys] = useState([]);
@@ -81,7 +86,7 @@ const PrimaryTable = () => {
                 <span className="mr-[8px!important] font-medium text-base leading-[100%] tracking-[-2%] underline decoration-solid decoration-[0%] text-[#ff4641] cursor-pointer">
                   {record?.orderNumber}
                 </span>
-                <span className=" w-[24] h-[10] font-bold text-[10px] leading-[100%] tracking-[0%] gap-2.5 rounded p-[3px] bg-[#707EFA] text-[white]">
+                <span className="font-bold text-[10px] leading-[100%] tracking-[0%] gap-2.5 rounded p-[3px] bg-[#707EFA] text-[white]">
                   New
                 </span>
               </div>
@@ -100,6 +105,27 @@ const PrimaryTable = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      render: (_, record) => {
+        return (
+          <div>
+            <button
+              className="flex justify-between items-center px-[10px!important] py-[8px!important] rounded-[100px]"
+              style={{
+                background: record?.status === "Pending" ? "#FD7004" :record?.status==='Approved'?"#FF4641":"#A1A1A1",
+              }}
+            >
+              <span className="mr-[6px!important]">
+                {record?.status==='Pending'&&<PendingIcon />}
+                {record?.status==='Approved'&&<ApprovedIcon/>}
+                {record?.status==='Rejected'&&<RejectedIcon/>}
+              </span>
+              <span className="font-semibold text-sm leading-[100%] tracking-[-2%] text-[#ffffff]">
+                {record.status}
+              </span>
+            </button>
+          </div>
+        );
+      },
     },
     {
       title: "Total Order",
@@ -138,33 +164,26 @@ const PrimaryTable = () => {
           onExpand: (expanded, record) => {
             setExpandedRowKeys(expanded ? [record.key] : []);
           },
-          expandedRowRender: (record) => (
-            <p style={{ margin: 0 }}>{record.description}</p>
-          ),
+          expandedRowRender: (record) => <ExpandableComp />,
           expandIcon: ({ expanded, onExpand, record }) => (
-            <Button
-              type="primary"
-              shape="circle"
-              size="small"
+            <button
               onClick={(e) => onExpand(record, e)}
-              icon={
-                <button
-                  className="flex items-center"
-                  style={{
-                    border: "1px solid #000000",
-                    borderRadius: "100px",
-                    padding: "10px 16px",
-                  }}
-                >
-                  <span className="font-bold">View</span>
-                  <span className="ml-[8px!important] mt-[3px!important]">
-                    {expanded ? <DownIcon /> : <>Icon</>}
-                  </span>
-                </button>
-              }
-            />
+              className="flex items-center"
+              style={{
+                border: "1px solid #000000",
+                borderRadius: "100px",
+                padding: "10px 16px",
+              }}
+            >
+              <span className="font-bold">View</span>
+              <span className="ml-[8px!important] mt-[3px!important]">
+                {expanded ? <DownIcon /> : <UpIcon />}
+              </span>
+            </button>
           ),
         }}
+        footer={null}
+        pagination={null}
       />
     </>
   );

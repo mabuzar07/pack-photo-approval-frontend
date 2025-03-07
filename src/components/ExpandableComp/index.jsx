@@ -1,24 +1,29 @@
+import AmountIcon from "../../assets/svg/AmountIcon";
+import TimeIcon from "../../assets/svg/TimeIcon";
 import UserIcon from "../../assets/svg/UserIcon";
+import AddressIcon from "../../assets/svg/AddressIcon";
+import PhotoIcon from "../../assets/svg/PhotoIcon";
+import BoxIcon from "../../assets/svg/BoxIcon";
 
 const ExpandableComp = () => {
   const properties = [
     { heading: "Packed By", text: "Joshua S.", icon: <UserIcon/> },
-    { heading: "Total Amount", text: "177", icon: <UserIcon /> },
-    { heading: "Packing Time", text: "5h 13m", icon: <UserIcon /> },
+    { heading: "Total Amount", text: "177", icon: <AmountIcon/> },
+    { heading: "Packing Time", text: "5h 13m", icon: <TimeIcon/> },
     {
       heading: "Address",
       text: "6340 14 Mile Rd, Warren, MI",
-      icon: <UserIcon />,
+      icon: <AddressIcon/>,
     },
     {
       heading: "Photo Taken",
       text: "Feb 20, 2025 14:08 PM",
-      icon: <UserIcon />,
+      icon: <PhotoIcon/>,
     },
     {
       heading: "Shipping Seletected",
       text: "Next business day shipping",
-      icon: <UserIcon />,
+      icon: <BoxIcon/>,
     },
   ];
   const products = [
