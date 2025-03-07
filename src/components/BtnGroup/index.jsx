@@ -25,7 +25,7 @@ const BtnGroup = () => {
     },
   ];
   return (
-    <div className="flex justify-between min-w-[535px]">
+    <div className="flex justify-between min-w-[550px]">
       {upperButton.map((btn) => {
         return (
           <>
@@ -38,7 +38,7 @@ const BtnGroup = () => {
                 borderColor: btn?.text === activeBtn ? "#FF4641" : "#CECECE",
                 borderStyle: btn?.text === activeBtn ? "solid" : "",
                 borderRadius: "100px",
-                padding: "8px 10px",
+                padding: "8px 12px",
                 margin: "0 5px 0 0",
               }}
               onClick={() => {

@@ -7,23 +7,23 @@ import BoxIcon from "../../assets/svg/BoxIcon";
 
 const ExpandableComp = () => {
   const properties = [
-    { heading: "Packed By", text: "Joshua S.", icon: <UserIcon/> },
-    { heading: "Total Amount", text: "177", icon: <AmountIcon/> },
-    { heading: "Packing Time", text: "5h 13m", icon: <TimeIcon/> },
+    { heading: "Packed By", text: "Joshua S.", icon: <UserIcon /> },
+    { heading: "Total Amount", text: "177", icon: <AmountIcon /> },
+    { heading: "Packing Time", text: "5h 13m", icon: <TimeIcon /> },
     {
       heading: "Address",
       text: "6340 14 Mile Rd, Warren, MI",
-      icon: <AddressIcon/>,
+      icon: <AddressIcon />,
     },
     {
       heading: "Photo Taken",
       text: "Feb 20, 2025 14:08 PM",
-      icon: <PhotoIcon/>,
+      icon: <PhotoIcon />,
     },
     {
       heading: "Shipping Seletected",
       text: "Next business day shipping",
-      icon: <BoxIcon/>,
+      icon: <BoxIcon />,
     },
   ];
   const products = [
@@ -71,84 +71,90 @@ const ExpandableComp = () => {
     },
   ];
   return (
-    <div className="w-[98%]" style={{ margin: "auto !important" }}>
-      <div className="flex justify-between items-start w-full mx-auto">
-        <div className="w-[57%] max-h-[608px] mt-[7px!important]">
-          <img src="./order_img_lg.png" alt="Order Image" className="rounded" />
-        </div>
-        <div
-          className="w-[42%] max-h-[608px] overflow-y-auto custom-scrollbar"
-          //   style={{ border: "1px solid #CECECE" }}
-        >
-          <div className="flex justify-between items-start flex-wrap">
-            {products?.map((prd) => {
-              return (
-                <div
-                  className="rounded-xl pt-[10px!important] w-[49%] my-[7px!important]"
-                  style={{ border: "1px solid #CECECE" }}
-                >
+    <>
+      <div className="w-[100%] bg-[white]" style={{ margin: "auto !important" }}>
+        <div className="flex justify-between items-start w-full mx-auto">
+          <div className="w-[57%] max-h-[608px] mt-[7px!important]">
+            <img
+              src="./order_img_lg.png"
+              alt="Order Image"
+              className="rounded"
+            />
+          </div>
+          <div
+            className="w-[42%] max-h-[608px] overflow-y-auto custom-scrollbar"
+            //   style={{ border: "1px solid #CECECE" }}
+          >
+            <div className="flex justify-between items-start flex-wrap">
+              {products?.map((prd) => {
+                return (
                   <div
-                    className="w-[93%] h-[200px] bg-cover bg-center rounded-xl"
-                    style={{
-                      backgroundImage: `url(${prd.img})`,
-                      border: "1px solid #CECECE",
-                      margin: "auto",
-                    }}
+                    className="rounded-xl pt-[10px!important] w-[49%] my-[7px!important]"
+                    style={{ border: "1px solid #CECECE" }}
                   >
-                    {/* Optional: Content inside the div */}
-                  </div>
+                    <div
+                      className="w-[93%] h-[200px] bg-cover bg-center rounded-xl"
+                      style={{
+                        backgroundImage: `url(${prd.img})`,
+                        border: "1px solid #CECECE",
+                        margin: "auto",
+                      }}
+                    >
+                      {/* Optional: Content inside the div */}
+                    </div>
 
-                  <div className="px-[8px] pt-[10px] pb-[10px]">
-                    <div className="flex justify-between items-center">
-                      <span>SKU</span>
-                      <span>{prd.sku}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span>Size & Type</span>
-                      <span>{prd.size_and_type}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span>Quantity</span>
-                      <span>{prd.quantity}</span>
+                    <div className="px-[8px] pt-[10px] pb-[10px]">
+                      <div className="flex justify-between items-center">
+                        <span>SKU</span>
+                        <span>{prd.sku}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span>Size & Type</span>
+                        <span>{prd.size_and_type}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span>Quantity</span>
+                        <span>{prd.quantity}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        className="w-full bg-[#F7F7F7] flex justify-evenly items-start flex-wrap rounded-xl"
-        style={{ border: "1px solid #CECECE" }}
-      >
-        {properties?.map((item) => {
-          return (
-            <div
-              className="w-[47%] flex justify-start items-center py-[10px!important]"
-              style={{ borderBottom: "1px solid #E4E4E4" }}
-            >
+        <div
+          className="w-full bg-[#F7F7F7] flex justify-evenly items-start flex-wrap rounded-xl my-[15px!important]"
+          style={{ border: "1px solid #CECECE" }}
+        >
+          {properties?.map((item) => {
+            return (
               <div
-                className="p-[10px] rounded-[100px] bg-[white] mr-[14px!important]"
-                style={{ borderRadius: "100px" }}
+                className="w-[47%] flex justify-start items-center py-[10px!important]"
+                style={{ borderBottom: "1px solid #E4E4E4" }}
               >
-                {item.icon}
-              </div>
-              <div className="flex flex-col justify-between h-full">
-                <div className="font-medium text-sm leading-[100%] tracking-[-2%] text-[#666666] mb-[10px!important]">
-                  {item.heading}
+                <div
+                  className="p-[10px] rounded-[100px] bg-[white] mr-[14px!important]"
+                  style={{ borderRadius: "100px" }}
+                >
+                  {item.icon}
                 </div>
-                <span className="font-semibold text-base leading-[100%] tracking-[-2%] text-[#000000]">
-                  {item.text}
-                </span>
+                <div className="flex flex-col justify-between h-full">
+                  <div className="font-medium text-sm leading-[100%] tracking-[-2%] text-[#666666] mb-[10px!important]">
+                    {item.heading}
+                  </div>
+                  <span className="font-semibold text-base leading-[100%] tracking-[-2%] text-[#000000]">
+                    {item.text}
+                  </span>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
       <div
-        className="w-full my-[10px!impotant]"
-        style={{ border: "1px solid black" }}
+        className="w-full my-[10px!impotant] rounded-xl"
+        style={{ border: "1px solid #CECECE" }}
       >
         <div className="w-full p-[10px!important] flex justify-around items-center">
           <button
@@ -165,7 +171,7 @@ const ExpandableComp = () => {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default ExpandableComp;
