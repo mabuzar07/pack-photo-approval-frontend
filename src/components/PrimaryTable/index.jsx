@@ -1,4 +1,4 @@
-import { Button, Table } from "antd";
+import { Table } from "antd";
 import "./styles.css";
 import { useState } from "react";
 import DownIcon from "../../assets/svg/DownIcon";
@@ -60,7 +60,7 @@ const PrimaryTable = () => {
       totalAmount: 177.0,
     },
     {
-      key: 4,
+      key: 5,
       img: "./order_img.png",
       imgLg: "order_img_lg.png",
       orderNumber: "25689183715",
@@ -86,9 +86,11 @@ const PrimaryTable = () => {
                 <span className="mr-[8px!important] font-medium text-base leading-[100%] tracking-[-2%] underline decoration-solid decoration-[0%] text-[#ff4641] cursor-pointer">
                   {record?.orderNumber}
                 </span>
-                <span className="font-bold text-[10px] leading-[100%] tracking-[0%] gap-2.5 rounded p-[3px] bg-[#707EFA] text-[white]">
-                  New
-                </span>
+                {record.new && (
+                  <span className="font-bold text-[10px] leading-[100%] tracking-[0%] gap-2.5 rounded p-[3px] bg-[#707EFA] text-[white]">
+                    New
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -111,13 +113,18 @@ const PrimaryTable = () => {
             <button
               className="flex justify-between items-center px-[10px!important] py-[8px!important] rounded-[100px]"
               style={{
-                background: record?.status === "Pending" ? "#FD7004" :record?.status==='Approved'?"#FF4641":"#A1A1A1",
+                background:
+                  record?.status === "Pending"
+                    ? "#FD7004"
+                    : record?.status === "Approved"
+                    ? "#FF4641"
+                    : "#A1A1A1",
               }}
             >
               <span className="mr-[6px!important]">
-                {record?.status==='Pending'&&<PendingIcon />}
-                {record?.status==='Approved'&&<ApprovedIcon/>}
-                {record?.status==='Rejected'&&<RejectedIcon/>}
+                {record?.status === "Pending" && <PendingIcon />}
+                {record?.status === "Approved" && <ApprovedIcon />}
+                {record?.status === "Rejected" && <RejectedIcon />}
               </span>
               <span className="font-semibold text-sm leading-[100%] tracking-[-2%] text-[#ffffff]">
                 {record.status}
@@ -145,20 +152,22 @@ const PrimaryTable = () => {
       },
     },
     Table.EXPAND_COLUMN,
-    // {
-    //   title: "",
-    //   key: "actions",
-    //   render: (_, record) => {
-    //     return <button>View</button>;
-    //   },
-    // },
   ];
+
   return (
     <>
       <Table
         dataSource={dataSource}
         columns={columns}
         rowKey="key"
+        rowClassName={(record) => {
+          return expandedRowKeys.includes(record.key)
+            ? "table-row-custom expanded-row"
+            : "table-row-custom";
+        }}
+        className="custom-table"
+        // tableLayout="fixed"
+        bordered={false}
         expandable={{
           expandedRowKeys,
           onExpand: (expanded, record) => {
@@ -183,9 +192,10 @@ const PrimaryTable = () => {
           ),
         }}
         footer={null}
-        pagination={false} 
+        pagination={false}
       />
     </>
   );
 };
+
 export default PrimaryTable;

@@ -7,38 +7,181 @@
   letter-spacing: -2%;
   background: #f7f7f7 !important;
 }
-.ant-table-thead > tr{
-    margin-bottom:"40px!important"
+.ant-table-thead > tr {
+  margin-bottom: "40px!important";
 }
 
-/* .custom-scrollbar::-webkit-scrollbar {
-    width: 3px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #909090;
-    border-radius: 2px;
+/* Reset border-collapse and add spacing between rows - UPDATED to 22px */
+.custom-table .ant-table-tbody {
+  border-spacing: 0 22px !important;
+  border-collapse: separate !important;
+}
 
-  } */
+/* Added: Apply this to the table container as well */
+.custom-table .ant-table-container {
+  border-collapse: separate !important;
+  border-spacing: 0 22px !important;
+}
 
-  /* Hide scrollbar arrows */
+/* Added: This targets the actual table */
+.custom-table .ant-table table {
+  border-collapse: separate !important;
+  border-spacing: 0 22px !important;
+}
+
+/* Target row cells to style them */
+.custom-table .ant-table-tbody > tr.table-row-custom > td {
+  background: white !important;
+  border: 1px solid #e5e5e5;
+  padding: 12px !important;
+}
+
+/* Style for first cell in row */
+.custom-table .ant-table-tbody > tr.table-row-custom > td:first-child {
+  border-top-left-radius: 12px !important;
+  border-bottom-left-radius: 12px !important;
+  border-right: none;
+}
+
+/* Style for last cell in row */
+.custom-table .ant-table-tbody > tr.table-row-custom > td:last-child {
+  border-top-right-radius: 12px !important;
+  border-bottom-right-radius: 12px !important;
+  border-left: none;
+}
+
+/* Style for middle cells */
+.custom-table
+  .ant-table-tbody
+  > tr.table-row-custom
+  > td:not(:first-child):not(:last-child) {
+  border-left: none;
+  border-right: none;
+}
+
+/* Set height for rows */
+.custom-table .ant-table-tbody > tr.table-row-custom {
+  height: 72px !important;
+}
+
+/* Reset any potential margin that might be collapsing */
+.custom-table .ant-table-tbody > tr {
+  margin: 0 !important;
+}
+
+/* Remove default table borders */
+.custom-table .ant-table {
+  background: transparent !important;
+}
+
+/* Added: Make sure the table background is transparent so spacing shows */
+.custom-table,
+.custom-table .ant-table-container {
+  background: transparent !important;
+}
+
+/* Style for expanded row cells - all borders and red background */
+.custom-table .ant-table-tbody > tr.expanded-row > td {
+  background: rgba(255, 70, 65, 0.05) !important; /* Light red background */
+  border: 1px solid #ff4641 !important;
+  padding: 12px !important;
+}
+
+/* Make sure the border color shows up for the first cell in an expanded row */
+.custom-table .ant-table-tbody > tr.expanded-row > td:first-child {
+  border-top-left-radius: 12px !important;
+  border-bottom-left-radius: 0 !important; /* Removed bottom radius */
+  border-right: none !important;
+  border-left: 1px solid #ff4641 !important;
+  border-top: 1px solid #ff4641 !important;
+  border-bottom: 1px solid #ff4641 !important;
+}
+
+/* Make sure the border color shows up for the last cell in an expanded row */
+.custom-table .ant-table-tbody > tr.expanded-row > td:last-child {
+  border-top-right-radius: 12px !important;
+  border-bottom-right-radius: 0 !important; /* Removed bottom radius */
+  border-left: none !important;
+  border-right: 1px solid #ff4641 !important;
+  border-top: 1px solid #ff4641 !important;
+  border-bottom: 1px solid #ff4641 !important;
+}
+
+/* Style for middle cells in expanded row */
+.custom-table
+  .ant-table-tbody
+  > tr.expanded-row
+  > td:not(:first-child):not(:last-child) {
+  border-left: none !important;
+  border-right: none !important;
+  border-top: 1px solid #ff4641 !important;
+  border-bottom: 1px solid #ff4641 !important;
+}
+
+/* Remove spacing after expanded row */
+.custom-table .ant-table-tbody > tr.expanded-row {
+  margin-bottom: 0 !important;
+}
+
+/* Remove spacing between expanded row and expanded content */
+.custom-table .ant-table-tbody > tr.expanded-row + tr.ant-table-expanded-row {
+  margin-top: -22px !important;
+}
+
+/* Style for expanded content */
+.custom-table .ant-table-expanded-row > td {
+  background: white !important;
+  padding: 20px !important;
+  border: 1px solid #ff4641 !important;
+  border-top: none !important;
+  border-radius: 0 0 12px 12px !important;
+  margin-top: -22px !important;
+  position: relative;
+  top: -22px !important;
+}
+
+/* Style for expanded div */
+.custom-table .ant-table-expanded-row-fixed {
+  margin: 0 !important;
+  padding: 16px !important;
+  border: 1px solid #ff4641 !important;
+  border-top: none !important;
+  border-radius: 0 0 12px 12px !important;
+  width: 100% !important;
+}
+
+/* NEW: Style for button container in expanded content */
+.custom-table .ant-table-expanded-row .button-container {
+  background-color: rgba(255, 70, 65, 0.05) !important;
+  border-top: 1px solid #ff4641 !important;
+  margin-top: 20px !important;
+  padding: 16px !important;
+  border-radius: 0 !important;
+  margin-bottom: -19px;
+}
+
+/* Styling for buttons inside the expanded content */
+.custom-table .ant-table-expanded-row .button-container button {
+  margin-right: 12px !important;
+}
+
+/* Hide scrollbar arrows */
 .custom-scrollbar::-webkit-scrollbar-button {
-    display: none;
-  }
-  
-  /* Set scrollbar width */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 4px; /* Adjust scrollbar width */
-  }
-  
-  /* Style scrollbar thumb */
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3); /* Scrollbar color */
-    border-radius: 4px;
-  }
-  
-  /* Make track same width as scrollbar */
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent; /* Makes track transparent */
-  }
-  
+  display: none;
+}
+
+/* Set scrollbar width */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px; /* Adjust scrollbar width */
+}
+
+/* Style scrollbar thumb */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3); /* Scrollbar color */
+  border-radius: 4px;
+}
+
+/* Make track same width as scrollbar */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* Makes track transparent */
+}
