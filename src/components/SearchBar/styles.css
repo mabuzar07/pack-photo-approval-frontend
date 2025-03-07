@@ -24,6 +24,12 @@ input[type="search"] {
   border: 1px solid transparent;
   border-radius: inherit;
 }
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
 
 input[type="search"]::placeholder {
   color: #bbb;
@@ -56,11 +62,10 @@ input[type="search"]:focus {
 }
 
 input.nosubmit {
-  border: 1px solid #CECECE;
+  border: 1px solid #cecece;
   width: 100%;
   padding: 9px 165px 9px 40px;
-    background: transparent
+  background: transparent
     url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M10%2018C11.775%2017.9998%2013.4989%2017.4056%2014.897%2016.312L19.293%2020.708L20.707%2019.294L16.311%2014.898C17.4051%2013.4997%2017.9997%2011.7755%2018%2010C18%205.589%2014.411%202%2010%202C5.589%202%202%205.589%202%2010C2%2014.411%205.589%2018%2010%2018ZM10%204C13.309%204%2016%206.691%2016%2010C16%2013.309%2013.309%2016%2010%2016C6.691%2016%204%2013.309%204%2010C4%206.691%206.691%204%2010%204Z%22%20fill%3D%22%23666666%22%2F%3E%3C%2Fsvg%3E")
     no-repeat 13px center;
-
 }
