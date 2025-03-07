@@ -1,0 +1,44 @@
+.ant-table-thead > tr > th {
+  color: #666666 !important;
+  font-family: Inter;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: -2%;
+  background: #f7f7f7 !important;
+}
+.ant-table-thead > tr{
+    margin-bottom:"40px!important"
+}
+
+/* .custom-scrollbar::-webkit-scrollbar {
+    width: 3px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #909090;
+    border-radius: 2px;
+
+  } */
+
+  /* Hide scrollbar arrows */
+.custom-scrollbar::-webkit-scrollbar-button {
+    display: none;
+  }
+  
+  /* Set scrollbar width */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px; /* Adjust scrollbar width */
+  }
+  
+  /* Style scrollbar thumb */
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Scrollbar color */
+    border-radius: 4px;
+  }
+  
+  /* Make track same width as scrollbar */
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* Makes track transparent */
+  }
+  
