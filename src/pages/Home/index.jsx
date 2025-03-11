@@ -1,358 +1,89 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FilterAndSerachSection from "../../components/FilterAndSerachSection";
 import PrimaryTable from "../../components/PrimaryTable";
 import TopSection from "../../components/TopSection";
+import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Home = () => {
-  const [data, setData] = useState([
-    {
-      shippedCarrier: "FedEx",
-      dealsOnOrder: "[]",
-      statusChanges: [
-        '{"date": 1741584512703, "status": "onHold"}',
-        '{"date": 1741600909, "status": "paid"}',
-        '{"date": 1741607751499, "status": "printing"}',
-        '{"date": 1741628067524, "status": "packed"}',
-      ],
-      cutDate: "1741600261000",
-      orderApprovedDate: "1741600909810",
-      lastModified: "1741584513",
-      orderDate: 1741584513,
-      packedDate: 1741628067516,
-      shippingAddress: {
-        zip: "48126",
-        country: "US",
-        default: "true",
-        lineTwo: "",
-        city: "San Diego",
-        name: "",
-        lineOne: "451 Galvin Avenue",
-        state: "MI",
-      },
-      orderStatus: "packed",
-      packedImage:
-        "https://packed-orders.s3.us-east-2.amazonaws.com/SB-157677-packed.webp",
-      total: 72,
-      readyToPrintDate: "1741609144426",
-      filesDueBy: "1741608000000",
-      customerEmail: "customer1@gmail.com",
-      trackingNumber: "286266603348",
-      accountFlag: '{"msg": "", "isFlagged": "false"}',
-      discounts: "[]",
-      orderNumber: "SB-157677",
-      shipDate: 1741726800000,
-      lineItems: [
-        {
-          approved: "true",
-          total: "9",
-          size: '2.2" x 3"',
-          reprint: "false",
-          imageURL:
-            "https://printappupload.s3.us-east-2.amazonaws.com/SB-406252-132-678.jpg",
-          qty: "15",
-          amountPacked: "15",
-          packedImage: "false",
-          SKU: "SB-406252-132",
-          title: "Totodile",
-          type: "Die Cut Sticker",
-        },
-        {
-          approved: "true",
-          total: "9",
-          size: '2.9" x 3"',
-          reprint: "false",
-          imageURL:
-            "https://printappupload.s3.us-east-2.amazonaws.com/SB-406253-508-187.jpg",
-          qty: "15",
-          amountPacked: "15",
-          packedImage: "false",
-          SKU: "SB-406253-508",
-          title: "Tinkaton",
-          type: "Die Cut Sticker",
-        },
-        {
-          approved: "true",
-          total: "9",
-          size: '3" x 2.7"',
-          reprint: "false",
-          imageURL:
-            "https://printappupload.s3.us-east-2.amazonaws.com/SB-406256-123-930.jpg",
-          qty: "15",
-          amountPacked: "15",
-          packedImage: "false",
-          SKU: "SB-406256-123",
-          title: "mudkip",
-          type: "Die Cut Sticker",
-        },
-        {
-          approved: "true",
-          total: "9",
-          size: '2.7" x 3"',
-          reprint: "false",
-          imageURL:
-            "https://printappupload.s3.us-east-2.amazonaws.com/SB-406258-4-653.jpg",
-          qty: "15",
-          amountPacked: "15",
-          packedImage: "false",
-          SKU: "SB-406258-4",
-          title: "eevee",
-          type: "Die Cut Sticker",
-        },
-        {
-          approved: "true",
-          total: "9",
-          size: '3" x 2.9"',
-          reprint: "false",
-          imageURL:
-            "https://printappupload.s3.us-east-2.amazonaws.com/SB-406259-829-473.jpg",
-          qty: "15",
-          amountPacked: "15",
-          packedImage: "false",
-          SKU: "SB-406259-829",
-          title: "cyndaquil",
-          type: "Die Cut Sticker",
-        },
-        {
-          approved: "true",
-          total: "9",
-          size: '2.4" x 3"',
-          reprint: "false",
-          imageURL:
-            "https://printappupload.s3.us-east-2.amazonaws.com/SB-406255-851-72.jpg",
-          qty: "15",
-          amountPacked: "15",
-          packedImage: "false",
-          SKU: "SB-406255-851",
-          title: "dratini",
-          type: "Die Cut Sticker",
-        },
-        {
-          approved: "true",
-          total: "9",
-          size: '3" x 2.4"',
-          reprint: "false",
-          imageURL:
-            "https://printappupload.s3.us-east-2.amazonaws.com/SB-406257-565-561.jpg",
-          qty: "15",
-          amountPacked: "15",
-          packedImage: "false",
-          SKU: "SB-406257-565",
-          title: "ditto",
-          type: "Die Cut Sticker",
-        },
-        {
-          approved: "true",
-          total: "9",
-          size: '2.3" x 3"',
-          reprint: "false",
-          imageURL:
-            "https://printappupload.s3.us-east-2.amazonaws.com/SB-406254-554-409.jpg",
-          qty: "15",
-          amountPacked: "15",
-          packedImage: "false",
-          SKU: "SB-406254-554",
-          title: "mimikyu",
-          type: "Die Cut Sticker",
-        },
-      ],
-      tax: "0",
-      fb_pixel_id: "no-pixel",
-      onBatch: "3-10-dieCut-453",
-      shippingService: '{"price": 0, "service": "FedEx 2Day"}',
-      orderBatchedDate: "1741607752604",
-      deliveryPrediction: "1741843698331",
-      timeSpent: "1.3894666666666666",
-      firstOrder: false,
-      packedBy: "packer@yahoo.com",
-      onTheWayPridiction:
-        '{"oneDay": "{\\"deliveryDay\\": \\"Tuesday, March 11th\\", \\"transitDays\\": \\"1\\", \\"day\\": \\"TUE\\"}", "twoDay": "{\\"deliveryDay\\": \\"Wednesday, March 12th\\", \\"transitDays\\": \\"2\\", \\"day\\": \\"WED\\"}", "ground": "{\\"deliveryDay\\": \\"Thursday, March 13th\\", \\"transitDays\\": \\"3\\", \\"day\\": \\"THU\\"}"}',
-      printDate: "1741610524651",
-      shippingPridiction:
-        '{"date": "Thursday, March 13th", "timeStamp": 1741843698331, "default": "true", "service": "FedEx 2Day", "price": 0}',
-      subTotal: 72,
-      orderFlag: {
-        isFlagged: false,
-        msg: "",
-      },
-    },
-    {
-      shippedCarrier: "FedEx",
-      dealsOnOrder: "[]",
-      statusChanges: [
-        '{"date": 1741574454733, "status": "onHold"}',
-        '{"date": 1741589209, "status": "paid"}',
-        '{"date": 1741600076618, "status": "printing"}',
-        '{"date": 1741623371753, "status": "packed"}',
-      ],
-      cutDate: "1741602541000",
-      orderApprovedDate: "1741589210138",
-      lastModified: "1741574455",
-      orderDate: 1741574455,
-      packedDate: 1741623371744,
-      shippingAddress: {
-        zip: "90205",
-        default: "true",
-        lineTwo: "Apt 204",
-        city: "Portland",
-        name: "Angry Customer",
-        lineOne: "455 SW 21st Ave",
-        state: "CA",
-      },
-      orderStatus: "packed",
-      packedImage:
-        "https://packed-orders.s3.us-east-2.amazonaws.com/SB-157672-packed.webp",
-      paymentInfo: "pi_3R0wGqD9ZjGkVV9l1Vu0yGgf",
-      total: 89.22,
-      readyToPrintDate: "1741604143703",
-      filesDueBy: "1741608000000",
-      customerEmail: "krissymjohnston@gmail.com",
-      trackingNumber: "286260466474",
-      accountFlag: '{"msg": "", "isFlagged": "false"}',
-      discounts:
-        '["{\\"referrer\\": \\"n/a\\", \\"amount\\": 1, \\"formatedTotal\\": \\"$15.74\\", \\"name\\": \\"Multi Design\\", \\"type\\": \\"multi\\"}"]',
-      orderNumber: "SB-157672",
-      shipDate: 1741640400000,
-      lineItems: [
-        {
-          approved: "true",
-          total: "37.73",
-          size: '2" x 1.6"',
-          reprint: "false",
-          imageURL:
-            "https://printappupload.s3.us-east-2.amazonaws.com/SB-406235-315-754.jpg",
-          qty: "65",
-          amountPacked: "65",
-          packedImage: "false",
-          SKU: "SB-406235-315",
-          title: "Aprilstickerbonus ",
-          type: "Die Cut Sticker",
-        },
-        {
-          approved: "true",
-          total: "67.23",
-          size: '3" x 2.9"',
-          reprint: "false",
-          imageURL:
-            "https://printappupload.s3.us-east-2.amazonaws.com/SB-406236-846-689.jpg",
-          qty: "65",
-          amountPacked: "65",
-          packedImage: "false",
-          SKU: "SB-406236-846",
-          title: "AprilSticker ",
-          type: "Die Cut Sticker",
-        },
-      ],
-      tax: "0",
-      fb_pixel_id: "no-pixel",
-      onBatch: "3-10-dieCut-777",
-      shippingService: '{"price": 0, "service": "FedEx 2Day"}',
-      orderBatchedDate: "1741600080172",
-      deliveryPrediction: "1741920048959",
-      timeSpent: "14.363733333333332",
-      firstOrder: false,
-      packedBy: "packer1@yahoo.com",
-      onTheWayPridiction: "error in shipping pridiction",
-      printDate: "1741610460734",
-      shippingPridiction:
-        '{"date": "Thursday, March 13th", "timeStamp": 1741920048959, "default": "true", "service": "FedEx 2Day", "price": 0}',
-      subTotal: 104.96,
-      orderFlag: {
-        isFlagged: false,
-        msg: "",
-      },
-    },
-    {
-      shippedCarrier: "FedEx",
-      dealsOnOrder: "[]",
-      statusChanges: [
-        '{"date": 1741574454733, "status": "onHold"}',
-        '{"date": 1741589209, "status": "paid"}',
-        '{"date": 1741600076618, "status": "printing"}',
-        '{"date": 1741623371753, "status": "packed"}',
-      ],
-      cutDate: "1741602541000",
-      orderApprovedDate: "1741589210138",
-      lastModified: "1741574455",
-      orderDate: 1741574455,
-      packedDate: 1741623371744,
-      shippingAddress: {
-        zip: "90205",
-        default: "true",
-        lineTwo: "Apt 204",
-        city: "Portland",
-        name: "Angry Customer",
-        lineOne: "455 SW 21st Ave",
-        state: "CA",
-      },
-      orderStatus: "packed",
-      packedImage:
-        "https://packed-orders.s3.us-east-2.amazonaws.com/SB-157672-packed.webp",
-      paymentInfo: "pi_3R0wGqD9ZjGkVV9l1Vu0yGgf",
-      total: 89.22,
-      readyToPrintDate: "1741604143703",
-      filesDueBy: "1741608000000",
-      customerEmail: "krissymjohnston@gmail.com",
-      trackingNumber: "286260466474",
-      accountFlag: '{"msg": "", "isFlagged": "false"}',
-      discounts:
-        '["{\\"referrer\\": \\"n/a\\", \\"amount\\": 1, \\"formatedTotal\\": \\"$15.74\\", \\"name\\": \\"Multi Design\\", \\"type\\": \\"multi\\"}"]',
-      orderNumber: "SB-157672",
-      shipDate: 1741640400000,
-      lineItems: [
-        {
-          approved: "true",
-          total: "37.73",
-          size: '2" x 1.6"',
-          reprint: "false",
-          imageURL:
-            "https://printappupload.s3.us-east-2.amazonaws.com/SB-406235-315-754.jpg",
-          qty: "65",
-          amountPacked: "65",
-          packedImage: "false",
-          SKU: "SB-406235-315",
-          title: "Aprilstickerbonus ",
-          type: "Die Cut Sticker",
-        },
-        {
-          approved: "true",
-          total: "67.23",
-          size: '3" x 2.9"',
-          reprint: "false",
-          imageURL:
-            "https://printappupload.s3.us-east-2.amazonaws.com/SB-406236-846-689.jpg",
-          qty: "65",
-          amountPacked: "65",
-          packedImage: "false",
-          SKU: "SB-406236-846",
-          title: "AprilSticker ",
-          type: "Die Cut Sticker",
-        },
-      ],
-      tax: "0",
-      fb_pixel_id: "no-pixel",
-      onBatch: "3-10-dieCut-777",
-      shippingService: '{"price": 0, "service": "FedEx 2Day"}',
-      orderBatchedDate: "1741600080172",
-      deliveryPrediction: "1741920048959",
-      timeSpent: "14.363733333333332",
-      firstOrder: false,
-      packedBy: "packer1@yahoo.com",
-      onTheWayPridiction: "error in shipping pridiction",
-      printDate: "1741610460734",
-      shippingPridiction:
-        '{"date": "Thursday, March 13th", "timeStamp": 1741920048959, "default": "true", "service": "FedEx 2Day", "price": 0}',
-      subTotal: 104.96,
-      orderFlag: {
-        isFlagged: false,
-        msg: "",
-      },
-    },
-  ]);
+  const [data, setData] = useState([]);
+  const [updatedAt, setUpdatedAt] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchData, setSearchData] = useState([]);
+  const [newest,setNewest]=useState(true)
+  const handleSort = (sortOrder) => {
+    const sortedData = [...data].sort((a, b) =>
+      sortOrder ? b.orderDate - a.orderDate : a.orderDate - b.orderDate
+    );
+    setData(sortedData);
+    setNewest(sortOrder);
+  };
+  const handleSearching = (e) => {
+    if (e?.target?.value) {
+      setIsSearching(true);
+      let value = e?.target?.value?.toLowerCase();
+      console.log('value',value)
+      const newData=data.filter((item) => {
+        if (
+          item?.shippingAddress?.name?.toLowerCase()?.includes(value) ||
+          item?.trackingNumber?.toLowerCase()?.includes(value) ||
+          item?.orderStatus?.toLowerCase()?.includes(value) ||
+          item?.total?.toString()?.includes(value)
+        ) {
+          return true;
+        } else {
+          false;
+        }
+      });
+      if(newData?.length>0){
+        setSearchData([...newData])
+      }else{
+        setSearchData([])
+      }
+    } else {
+      setSearchData([])
+      setIsSearching(false);
+    }
+  };
+  const getData = async (status) => {
+    let url = `${apiUrl}/get-all-data`;
+    if (status) {
+      url = url + "?status=" + status;
+    }
+    try {
+      const newDate = Date.now();
+      setUpdatedAt(newDate);
+      setLoading(true);
+      const response = await axios.get(url);
+      if (response?.status === 200 && response?.data?.data?.length > 0) {
+        setData([...response.data.data]);
+        console.log(response.data.data);
+      } else {
+        setData([]);
+      }
+      setLoading(false);
+    } catch (error) {
+      setData([]);
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div>
-      <TopSection />
-      <FilterAndSerachSection />
-      <PrimaryTable data={data} />
+      <TopSection getData={getData} loading={loading} updatedAt={updatedAt} />
+      <FilterAndSerachSection
+        getData={getData}
+        loading={loading}
+        data={data}
+        handleSearching={handleSearching}
+        handleSort={handleSort}
+        newest={newest}
+      />
+      <PrimaryTable data={data} loading={loading} isSearching={isSearching} searchData={searchData} />
     </div>
   );
 };

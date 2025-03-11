@@ -1,32 +1,58 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const BtnGroup = () => {
+const BtnGroup = ({ loading, getData, data }) => {
   const [activeBtn, setActiveBtn] = useState("All Orders");
-  const upperButton = [
+  const [count, setCount] = useState({});
+  const [btnInfo,setBtnInfo] = useState([
     {
       text: "All Orders",
+      value: "",
       showPostNumber: true,
-      postNumber: 2,
     },
     {
       text: "Pending",
+      value: "pending",
       showPostNumber: true,
-      postNumber: 2,
     },
     {
       text: "Approved",
+      value: "approved",
       showPostNumber: true,
-      postNumber: 0,
     },
     {
       text: "Rejected",
+      value: "rejected",
       showPostNumber: true,
-      postNumber: 0,
     },
-  ];
+    {
+      text: "Packed",
+      value: "packed",
+      showPostNumber: true,
+    },
+  ]);
+  useEffect(() => {
+    const tempCount = {};
+    if(Object.keys(count)?.length===0){
+      data?.forEach((item) => {
+        if (item.orderStatus) {
+          if (!tempCount[item.orderStatus]) {
+            tempCount[item.orderStatus] = 1;
+          } else if (tempCount[item.orderStatus]) {
+            tempCount[item.orderStatus] = tempCount[item.orderStatus] + 1;
+          }
+        }
+      });
+      console.log('tempCount',tempCount)
+      if (tempCount) {
+        setCount({ ...tempCount });
+      } else {
+        setCount({});
+      }
+    }
+  }, [data]);
   return (
-    <div className="flex justify-between min-w-[550px]">
-      {upperButton.map((btn) => {
+    <div className="flex justify-between min-w-[680px]">
+      {btnInfo.map((btn) => {
         return (
           <>
             <button
@@ -43,7 +69,9 @@ const BtnGroup = () => {
               }}
               onClick={() => {
                 setActiveBtn(btn?.text);
+                getData(btn?.value);
               }}
+              disabled={loading}
             >
               {btn?.text && (
                 <span
@@ -62,20 +90,22 @@ const BtnGroup = () => {
                   {btn?.icon}
                 </span>
               )}
-              {btn?.showPostNumber && (
-                <span
-                  className="font-bold text-sm text-center flex justify-center items-center pb-[0px!important]"
-                  style={{
-                    borderRadius: "100px",
-                    width: "25px",
-                    height: "25px",
-                    color: btn?.text === activeBtn ? "#000000" : "#FFFFFF",
-                    background: btn?.text === activeBtn ? "#FFFFFF" : "#A0A0A0",
-                  }}
-                >
-                  {btn?.postNumber}
-                </span>
-              )}
+              <span
+                className="font-bold text-sm text-center flex justify-center items-center pb-[0px!important]"
+                style={{
+                  borderRadius: "100px",
+                  width: "25px",
+                  height: "25px",
+                  color: btn?.text === activeBtn ? "#000000" : "#FFFFFF",
+                  background: btn?.text === activeBtn ? "#FFFFFF" : "#A0A0A0",
+                }}
+              >
+                {btn?.text == "All Orders" ? (
+                  <>{data?.length}</>
+                ) : (
+                  <>{count && count[btn?.value] ? count[btn.value] : 0}</>
+                )}
+              </span>
             </button>
           </>
         );

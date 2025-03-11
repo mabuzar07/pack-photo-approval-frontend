@@ -1,10 +1,16 @@
 import "./styles.css";
 
-const SearchBar = () => {
+const SearchBar = ({ loading,handleSearching }) => {
   return (
     <div className="container rounded">
-      <form className="nosubmit">
-        <input className="nosubmit" type="search" placeholder="Search orders or packs" />
+      <form className="nosubmit" disabled={loading}>
+        <input
+          className="nosubmit"
+          type="search"
+          placeholder="Search orders or packs"
+          disabled={loading}
+          onChange={handleSearching}
+        />
       </form>
     </div>
   );
