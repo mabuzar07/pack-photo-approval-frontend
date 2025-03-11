@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./styles.css";
 
 const RefreshIcon = (props) => (
   <svg
@@ -7,6 +8,7 @@ const RefreshIcon = (props) => (
     height="14"
     fill="none"
     viewBox="0 0 20 14"
+    className={`${props?.loading ? "refresh" : ""}`}
   >
     <path
       fill="#000"
