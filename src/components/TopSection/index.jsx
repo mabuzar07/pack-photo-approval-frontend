@@ -1,5 +1,6 @@
-import RefreshIcon from "../../assets/svg/RefreshIcon"
-const TopSection = () => {
+import moment from "moment";
+import RefreshIcon from "../../assets/svg/RefreshIcon";
+const TopSection = ({ getData, loading, updatedAt }) => {
   return (
     <section className="w-full flex justify-between">
       <h1 className="font-bold text-[32px] leading-[100%] tracking-[-2%]">
@@ -7,10 +8,22 @@ const TopSection = () => {
       </h1>
       <div className=" flex justify-end items-start">
         <span className="mr-[10px!important] font-normal text-sm leading-[100%] tracking-[-2%]">
-          Last updated: Feb 20, 2025 14:08 PM
+          Last updated:{" "}
+          {moment(updatedAt)?.isValid() ? (
+            <>{moment(updatedAt)?.format("MMM D, YYYY HH:mm A")}</>
+          ) : (
+            <></>
+          )}
         </span>
-        <button className="flex justify-between items-center cursor-pointer">
-          <RefreshIcon />
+        <button
+          disabled={loading}
+          className="flex justify-between items-center cursor-pointer"
+          onClick={() => {
+            console.log("running get data");
+            getData();
+          }}
+        >
+          <RefreshIcon loading={loading} />
           <span className="font-bold text-sm leading-[100%] tracking-[-2%] ml-[4px!important]">
             Refresh
           </span>
