@@ -72,7 +72,10 @@ const ExpandableComp = () => {
   ];
   return (
     <>
-      <div className="w-[100%] bg-[white]" style={{ margin: "auto !important" }}>
+      <div
+        className="w-[100%] bg-[white]"
+        style={{ margin: "auto !important" }}
+      >
         <div className="flex justify-between items-start w-full mx-auto">
           <div className="w-[57%] max-h-[608px] mt-[7px!important]">
             <img
@@ -152,19 +155,16 @@ const ExpandableComp = () => {
           })}
         </div>
       </div>
-      <div
-        className="w-full my-[10px!impotant] rounded-xl"
-        style={{ border: "1px solid #CECECE" }}
-      >
-        <div className="w-full p-[10px!important] flex justify-around items-center">
+      <div className="button-container">
+        <div className="w-full flex justify-around items-center">
           <button
-            className="w-[46%] bg-[#ff4641] h-[44] gap-2 px-4 py-3.5 rounded-[100px] text-[white] font-bold text-base leading-[100%] tracking-[-2%] text-center cursor-pointer"
+            className="approve-button w-[46%] bg-[#ff4641] h-[44] gap-2 px-4 py-3.5 rounded-[100px] text-[white] font-bold text-base leading-[100%] tracking-[-2%] text-center cursor-pointer"
             style={{ border: "1px solid #ff4641" }}
           >
             Approve
           </button>
           <button
-            className="w-[46%] bg-[white] h-[44] gap-2 px-4 py-3.5 rounded-[100px] text-[black] font-bold text-base leading-[100%] tracking-[-2%] text-center cursor-pointer"
+            className="deny-button w-[46%] bg-[white] h-[44] gap-2 px-4 py-3.5 rounded-[100px] text-[black] font-bold text-base leading-[100%] tracking-[-2%] text-center cursor-pointer"
             style={{ border: "1px solid black" }}
           >
             Deny

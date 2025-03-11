@@ -1,4 +1,4 @@
-import { Button, Table } from "antd";
+import { Table } from "antd";
 import "./styles.css";
 import { useState } from "react";
 import DownIcon from "../../assets/svg/DownIcon";
@@ -61,7 +61,7 @@ const PrimaryTable = ({data}) => {
       totalAmount: 177.0,
     },
     {
-      key: 4,
+      key: 5,
       img: "./order_img.png",
       imgLg: "order_img_lg.png",
       orderNumber: "25689183715",
@@ -162,39 +162,49 @@ const PrimaryTable = ({data}) => {
     },
     Table.EXPAND_COLUMN,
   ];
+
   return (
     <>
-        <Table
-          dataSource={data}
-          columns={columns}
-          rowKey="key"
-          expandable={{
-            expandedRowKeys,
-            onExpand: (expanded, record) => {
-              setExpandedRowKeys(expanded ? [record.key] : []);
-            },
-            expandedRowRender: (record) => <ExpandableComp />,
-            expandIcon: ({ expanded, onExpand, record }) => (
-              <button
-                onClick={(e) => onExpand(record, e)}
-                className="flex items-center"
-                style={{
-                  border: "1px solid #000000",
-                  borderRadius: "100px",
-                  padding: "8px 13px",
-                }}
-              >
-                <span className="font-bold">View</span>
-                <span className="ml-[8px!important] mt-[2px!important]">
-                  {expanded ? <DownIcon /> : <UpIcon />}
-                </span>
-              </button>
-            ),
-          }}
-          footer={null}
-          pagination={false}
-        />
+      <Table
+        dataSource={dataSource}
+        columns={columns}
+        rowKey="key"
+        rowClassName={(record) => {
+          return expandedRowKeys.includes(record.key)
+            ? "table-row-custom expanded-row"
+            : "table-row-custom";
+        }}
+        className="custom-table"
+        // tableLayout="fixed"
+        bordered={false}
+        expandable={{
+          expandedRowKeys,
+          onExpand: (expanded, record) => {
+            setExpandedRowKeys(expanded ? [record.key] : []);
+          },
+          expandedRowRender: (record) => <ExpandableComp />,
+          expandIcon: ({ expanded, onExpand, record }) => (
+            <button
+              onClick={(e) => onExpand(record, e)}
+              className="flex items-center"
+              style={{
+                border: "1px solid #000000",
+                borderRadius: "100px",
+                padding: "8px 13px",
+              }}
+            >
+              <span className="font-bold">View</span>
+              <span className="ml-[8px!important] mt-[2px!important]">
+                {expanded ? <DownIcon /> : <UpIcon />}
+              </span>
+            </button>
+          ),
+        }}
+        footer={null}
+        pagination={false}
+      />
     </>
   );
 };
+
 export default PrimaryTable;

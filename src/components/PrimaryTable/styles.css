@@ -7,38 +7,156 @@
   letter-spacing: -2%;
   background: #f7f7f7 !important;
 }
-.ant-table-thead > tr{
-    margin-bottom:"40px!important"
+.ant-table-thead > tr {
+  margin-bottom: "40px!important";
 }
 
-/* .custom-scrollbar::-webkit-scrollbar {
-    width: 3px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #909090;
-    border-radius: 2px;
+.custom-table .ant-table-tbody {
+  border-spacing: 0 22px !important;
+  border-collapse: separate !important;
+}
 
-  } */
+.custom-table .ant-table-container {
+  border-collapse: separate !important;
+  border-spacing: 0 22px !important;
+}
 
-  /* Hide scrollbar arrows */
+.custom-table .ant-table table {
+  border-collapse: separate !important;
+  border-spacing: 0 22px !important;
+}
+
+.custom-table .ant-table-tbody > tr.table-row-custom > td {
+  background: white !important;
+  border: 1px solid #e5e5e5;
+  padding: 12px !important;
+}
+
+.custom-table .ant-table-tbody > tr.table-row-custom > td:first-child {
+  border-top-left-radius: 12px !important;
+  border-bottom-left-radius: 12px !important;
+  border-right: none;
+}
+
+.custom-table .ant-table-tbody > tr.table-row-custom > td:last-child {
+  border-top-right-radius: 12px !important;
+  border-bottom-right-radius: 12px !important;
+  border-left: none;
+}
+
+.custom-table
+  .ant-table-tbody
+  > tr.table-row-custom
+  > td:not(:first-child):not(:last-child) {
+  border-left: none;
+  border-right: none;
+}
+
+.custom-table .ant-table-tbody > tr.table-row-custom {
+  height: 72px !important;
+}
+
+.custom-table .ant-table-tbody > tr {
+  margin: 0 !important;
+}
+
+.custom-table .ant-table {
+  background: transparent !important;
+}
+
+.custom-table,
+.custom-table .ant-table-container {
+  background: transparent !important;
+}
+
+.custom-table .ant-table-tbody > tr.expanded-row > td {
+  background: rgba(255, 70, 65, 0.05) !important;
+  border: 1px solid #ff4641 !important;
+  padding: 12px !important;
+}
+
+.custom-table .ant-table-tbody > tr.expanded-row > td:first-child {
+  border-top-left-radius: 12px !important;
+  border-bottom-left-radius: 0 !important;
+  border-right: none !important;
+  border-left: 1px solid #ff4641 !important;
+  border-top: 1px solid #ff4641 !important;
+  border-bottom: 1px solid #ff4641 !important;
+}
+
+.custom-table .ant-table-tbody > tr.expanded-row > td:last-child {
+  border-top-right-radius: 12px !important;
+  border-bottom-right-radius: 0 !important;
+  border-left: none !important;
+  border-right: 1px solid #ff4641 !important;
+  border-top: 1px solid #ff4641 !important;
+  border-bottom: 1px solid #ff4641 !important;
+}
+
+.custom-table
+  .ant-table-tbody
+  > tr.expanded-row
+  > td:not(:first-child):not(:last-child) {
+  border-left: none !important;
+  border-right: none !important;
+  border-top: 1px solid #ff4641 !important;
+  border-bottom: 1px solid #ff4641 !important;
+}
+
+.custom-table .ant-table-tbody > tr.expanded-row {
+  margin-bottom: 0 !important;
+}
+
+.custom-table .ant-table-tbody > tr.expanded-row + tr.ant-table-expanded-row {
+  margin-top: -22px !important;
+}
+
+.custom-table .ant-table-expanded-row > td {
+  background: white !important;
+  padding: 20px !important;
+  border: 1px solid #ff4641 !important;
+  border-top: none !important;
+  border-radius: 0 0 12px 12px !important;
+  margin-top: -22px !important;
+  position: relative;
+  top: -22px !important;
+}
+
+.custom-table .ant-table-expanded-row-fixed {
+  margin: 0 !important;
+  padding: 16px !important;
+  border: 1px solid #ff4641 !important;
+  border-top: none !important;
+  border-radius: 0 0 12px 12px !important;
+  width: 100% !important;
+}
+
+.custom-table .ant-table-expanded-row .button-container {
+  background-color: rgba(255, 70, 65, 0.05) !important;
+  border-top: 1px solid #ff4641 !important;
+  margin-top: 20px !important;
+  padding: 16px !important;
+  border-radius: 0 !important;
+  margin-bottom: -19px;
+}
+
+.custom-table .ant-table-expanded-row .button-container button {
+  margin-right: 12px !important;
+}
+
 .custom-scrollbar::-webkit-scrollbar-button {
-    display: none;
-  }
-  
-  /* Set scrollbar width */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 4px; /* Adjust scrollbar width */
-  }
-  
-  /* Style scrollbar thumb */
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3); /* Scrollbar color */
-    border-radius: 4px;
-  }
-  
-  /* Make track same width as scrollbar */
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent; /* Makes track transparent */
-  }
-  
+  display: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
