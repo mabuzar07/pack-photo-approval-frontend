@@ -7,71 +7,10 @@ import UpIcon from "../../assets/svg/UpIcon";
 import PendingIcon from "../../assets/svg/PendingIcon";
 import ApprovedIcon from "../../assets/svg/ApprovedIcon";
 import RejectedIcon from "../../assets/svg/RejectedIcon";
+import moment from "moment";
 
-const PrimaryTable = () => {
+const PrimaryTable = ({ data, loading, isSearching, searchData }) => {
   const [expandedRowKeys, setExpandedRowKeys] = useState([]);
-  const dataSource = [
-    {
-      key: 1,
-      img: "./order_img.png",
-      imgLg: "order_img_lg.png",
-      orderNumber: "25689183715",
-      name: "Omar Apollo",
-      new: true,
-      date: "Feb 18, 2025",
-      status: "Pending",
-      totalOrder: "4 Items",
-      totalAmount: 177.0,
-    },
-    {
-      key: 2,
-      img: "./order_img.png",
-      imgLg: "order_img_lg.png",
-      orderNumber: "25689183715",
-      name: "Omar Apollo",
-      new: true,
-      date: "Feb 18, 2025",
-      status: "Pending",
-      totalOrder: "4 Items",
-      totalAmount: 177.0,
-    },
-    {
-      key: 3,
-      img: "./order_img.png",
-      imgLg: "order_img_lg.png",
-      orderNumber: "25689183715",
-      name: "Omar Apollo",
-      new: false,
-      date: "Feb 18, 2025",
-      status: "Approved",
-      totalOrder: "4 Items",
-      totalAmount: 177.0,
-    },
-    {
-      key: 4,
-      img: "./order_img.png",
-      imgLg: "order_img_lg.png",
-      orderNumber: "25689183715",
-      name: "Omar Apollo",
-      new: false,
-      date: "Feb 18, 2025",
-      status: "Approved",
-      totalOrder: "4 Items",
-      totalAmount: 177.0,
-    },
-    {
-      key: 5,
-      img: "./order_img.png",
-      imgLg: "order_img_lg.png",
-      orderNumber: "25689183715",
-      name: "Omar Apollo",
-      new: false,
-      date: "Feb 18, 2025",
-      status: "Rejected",
-      totalOrder: "4 Items",
-      totalAmount: 177.0,
-    },
-  ];
   const columns = [
     {
       title: "Order Number",
@@ -79,14 +18,22 @@ const PrimaryTable = () => {
       render: (_, record) => {
         return (
           <div className="flex">
-            <img src={`${record?.img}`} className="rounded" />
+            <img
+              src={`${record?.packedImage}`}
+              className="rounded"
+              width="48px"
+              height="48px"
+            />
+
             <div className="flex flex-col ml-[12px!important] justify-between">
-              <div className="font-normal text-base">{record?.name}</div>
+              <div className="font-normal text-base min-h-[24px]">
+                {record?.shippingAddress?.name}
+              </div>
               <div className="flex">
                 <span className="mr-[8px!important] font-medium text-base leading-[100%] tracking-[-2%] underline decoration-solid decoration-[0%] text-[#ff4641] cursor-pointer">
-                  {record?.orderNumber}
+                  {record?.trackingNumber}
                 </span>
-                {record.new && (
+                {record?.firstOrder && (
                   <span className="font-bold text-[10px] leading-[100%] tracking-[0%] gap-2.5 rounded p-[3px] bg-[#707EFA] text-[white]">
                     New
                   </span>
@@ -99,14 +46,19 @@ const PrimaryTable = () => {
     },
     {
       title: "Order Date",
-      dataIndex: "date",
-      key: "date",
+      dataIndex: "orderDate",
+      key: "orderDate",
       className: "font-normal text-base leading-[100%] tracking-[-2%]",
+      render: (_, record) => {
+        return (
+          <span>{moment.unix(record?.orderDate).format("MMM DD, YYYY")}</span>
+        );
+      },
     },
     {
       title: "Status",
-      dataIndex: "status",
-      key: "status",
+      dataIndex: "orderStatus",
+      key: "orderStatus",
       render: (_, record) => {
         return (
           <div>
@@ -126,8 +78,8 @@ const PrimaryTable = () => {
                 {record?.status === "Approved" && <ApprovedIcon />}
                 {record?.status === "Rejected" && <RejectedIcon />}
               </span>
-              <span className="font-semibold text-sm leading-[100%] tracking-[-2%] text-[#ffffff]">
-                {record.status}
+              <span className="font-semibold text-sm leading-[100%] tracking-[-2%] text-[#ffffff] capitalize">
+                {record.orderStatus}
               </span>
             </button>
           </div>
@@ -136,9 +88,12 @@ const PrimaryTable = () => {
     },
     {
       title: "Total Order",
-      dataIndex: "totalOrder",
+      // dataIndex: "totalOrder",
       key: "totalOrder",
       className: "font-normal text-base leading-[100%] tracking-[-2%]",
+      render: (_, record) => {
+        return <span>{record?.lineItems?.length}</span>;
+      },
     },
     {
       title: "Total Amount",
@@ -146,37 +101,15 @@ const PrimaryTable = () => {
       render: (_, record) => {
         return (
           <span className="font-bold text-base leading-[100%] tracking-[-2%]">
-            ${record?.totalAmount?.toFixed(2)}
+            ${record?.total?.toFixed(2)}
           </span>
         );
       },
     },
-    Table.EXPAND_COLUMN,
-  ];
-
-  return (
-    <>
-      <Table
-        dataSource={dataSource}
-        columns={columns}
-        rowKey="key"
-        rowClassName={(record) => {
-          return expandedRowKeys.includes(record.key)
-            ? "table-row-custom expanded-row"
-            : "table-row-custom";
-        }}
-        className="custom-table"
-        // tableLayout="fixed"
-        bordered={false}
-        expandable={{
-          expandedRowKeys,
-          onExpand: (expanded, record) => {
-            setExpandedRowKeys(expanded ? [record.key] : []);
-          },
-          expandedRowRender: (record) => <ExpandableComp />,
-          expandIcon: ({ expanded, onExpand, record }) => (
-            <button
-              onClick={(e) => onExpand(record, e)}
+    {
+      render:(_,record)=>{
+        return(
+          <button
               className="flex items-center"
               style={{
                 border: "1px solid #000000",
@@ -186,11 +119,49 @@ const PrimaryTable = () => {
             >
               <span className="font-bold">View</span>
               <span className="ml-[8px!important] mt-[2px!important]">
-                {expanded ? <DownIcon /> : <UpIcon />}
+                {expandedRowKeys==record?.trackingNumber ? <DownIcon /> : <UpIcon />}
               </span>
             </button>
+        )
+      }
+    }
+    // Table.EXPAND_COLUMN,
+  ];
+
+  return (
+    <>
+      <Table
+        dataSource={isSearching ? searchData : data}
+        columns={columns}
+        loading={loading}
+        rowKey="trackingNumber"
+        rowClassName={(record) => {
+          return expandedRowKeys.includes(record.trackingNumber)
+            ? "table-row-custom expanded-row cursor-pointer"
+            : "table-row-custom cursor-pointer";
+        }}
+        className="custom-table"
+        // tableLayout="fixed"
+        bordered={false}
+        expandable={{
+          expandedRowKeys,
+          onExpand: (expanded, record) => {
+            setExpandedRowKeys(expanded ? [record.trackingNumber] : []);
+          },
+          expandedRowRender: (record) => <ExpandableComp record={record} />,
+          expandIcon: ({ expanded, onExpand, record }) => (
+            <></>
           ),
         }}
+        onRow={(record) => ({
+          onClick: () => {
+            setExpandedRowKeys((prevKeys) =>
+              prevKeys.includes(record.trackingNumber)
+                ? []
+                : [record.trackingNumber]
+            );
+          },
+        })}
         footer={null}
         pagination={false}
       />
